@@ -28,6 +28,8 @@ class Forward_List
 		const T & back() const;
 		const T & front() const;
 		void assign( const T & x );
+		void push_front( const T & x );
+		void pop_front();
 };
 
 template < typename T >
