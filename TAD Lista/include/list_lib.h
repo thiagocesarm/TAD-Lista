@@ -59,35 +59,39 @@ class Vector
 template < typename T >
 class Forward_List
 {
-	private:
-		struct Node {
-			T data;
-			Node *next;
-			Node ( const T & d = T ( ) , Node * p = nullptr , Node * n = nullptr ) : data(d), next(n) {}
-		};
 	public:
 	
-		Forward_List(size_type mi_size = 1);
+		Forward_List();
 		~Forward_List();
 		
 		/* COMMON METHODS */
-		size_type size() const;
-		void clear();
 		bool empty();
+		size_type size() const;
 		void push_back( const T & x );
 		void pop_back();
+		void clear();
 		const T & back() const;
 		const T & front() const;
-		void assign( const T & x );
+		void assign( const T & x ); 
 		
 		/* OPERATIONS EXCLUSIVE TO LINKED LISTS */
 		void push_front( const T & x );
 		void pop_front();
 		
 	private:
+		struct Node 
+		{
+			T data;
+			Node *next;
+			Node ( const T & d = T ( ) , Node * p = nullptr , Node * n = nullptr ) : 
+				data(d),
+				next(n)
+			{/* empty */}
+		};
+		
 		size_type m_size;
-		std::unique_ptr<Node> m_head;
-		std::unique_ptr<Node> m_tail;
+		Node * m_head;
+		Node * m_tail;
 };
 
 template < typename T >
@@ -110,5 +114,6 @@ class List
 };
 
 #include "vector.inl"
+#include "forward_list.inl"
 
 #endif
