@@ -13,6 +13,40 @@ template < typename T >
 class Vector
 {
 	public:
+		/*
+		class const_iterator { 
+			public:
+				const_iterator(Node* x) : current(x) {}
+				const T & operator* ( ) const;
+				const_iterator & operator++ (); //++it
+				const_iterator operator++ (int); //it++
+				const_iterator & operator-- ();  //--it
+				const_iterator operator-- (int); //it--
+				bool operator== (const const_iterator & rhs) const;
+				bool operator!= (const const_iterator & rhs) const;
+				
+			protected:
+				Node *current;
+				friend class List<T>;
+		};
+		
+		class iterator : public const_iterator { 
+			public:
+				iterator() : const_iterator() {  }
+				const T & operator* ( ) const;
+				T & operator* ();
+				
+				iterator & operator++ (); //++it
+				iterator operator++ (int); //it++
+				iterator & operator-- ();  //--it
+				iterator operator-- (int); //it--
+				
+			protected:
+				iterator( Node *p) : const_iterator(p);
+				friend class List<T>;			
+		};
+		*/
+
 		/** Construtor da classe*/
 		Vector( size_type mi_size = 1 );
 		/** Destrutor da classe*/
@@ -98,6 +132,9 @@ template < typename T >
 class List
 {
 	public:
+	
+		List();
+		~List();
 		/* COMMON METHODS */
 		size_type size() const;
 		void clear();
@@ -111,9 +148,26 @@ class List
 		/* OPERATIONS EXCLUSIVE TO LINKED LISTS */
 		void push_front( const T & x );
 		void pop_front();
+		
+	private:
+		struct Node 
+		{
+			T data;
+			Node *next;
+			Node *prev;
+			Node ( const T & d = T ( ) , Node * p = nullptr , Node * n = nullptr,  Node * m = nullptr) : 
+				data(d),
+				next(n), 
+				prev(m)
+			{/* empty */}
+		};
+		
+		size_type m_size;
+		Node * m_head;
+		Node * m_tail;
 };
 
 #include "vector.inl"
 #include "forward_list.inl"
-
+#include "list.inl"
 #endif

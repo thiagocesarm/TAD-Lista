@@ -7,6 +7,7 @@ int main()
 {
     Vector<int> vec;
     
+    
     std::cout << ">>>" << vec.capacity() << "\n";
     vec.push_back(3);
     std::cout << ">>>" << vec.capacity() << "\n";
@@ -33,6 +34,7 @@ int main()
     }
     
     std::cout << ">>>" << vec.capacity() << "\n";
-
+    
+    
     return EXIT_SUCCESS;
 }

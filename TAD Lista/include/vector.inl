@@ -121,3 +121,6 @@ void Vector<T>::reserve( size_type new_capacity )
     	v_capacity = new_capacity;
     }
 }
+
+//CLASS CONST ITERATOR
+

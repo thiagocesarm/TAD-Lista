@@ -6,7 +6,7 @@
 int main()
 {
     
-    Forward_List<int> forw; 
+    List<int> forw; 
     
     
     if ( forw.empty() )
@@ -14,6 +14,19 @@ int main()
     else
         std::cout << "NOT empty!\n";
         
+    forw.push_back(7);
+    forw.push_back(8);
+    forw.push_back(9);
+    forw.push_back(10);
+    forw.push_back(11);
+    
+    forw.push_front(12);
+    forw.push_front(13);
+    forw.push_front(14);
+    forw.push_front(15);
+    forw.push_front(16);
+        
+    /*
     forw.push_back(7);    
     forw.push_front(8);
     forw.push_back(9);
@@ -29,6 +42,7 @@ int main()
     std::cout << "Trás: >>>" << forw.back() << "\n";
     std::cout << "Frente: >>>" << forw.front() << "\n";
     std::cout << "Tamanho: >>>" << forw.size() << "\n";
+    */
 
         
     return EXIT_SUCCESS;

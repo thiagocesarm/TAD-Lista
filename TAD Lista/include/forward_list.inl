@@ -82,17 +82,20 @@ void Forward_List<T>::pop_back()
         ult->next = m_tail;
         m_size--;
     }
+    else
+    {
+        throw std::bad_function_call::bad_function_call("List is empty!");
+    }
 }
 
 
 template < typename T >
 void Forward_List<T>::clear() 
 {
-    if ( not empty() )
+    if ( !empty() )
     {
         Node * atual = m_head->next;
         Node * proximo = atual->next;
-        
         while (proximo != m_tail) 
         {
             delete atual;
@@ -101,9 +104,8 @@ void Forward_List<T>::clear()
         }
         
         delete atual;
-        
-        m_size = 0;
         m_head->next = m_tail;
+        m_size = 0;
     }
 }
 
@@ -126,28 +128,38 @@ void Forward_List<T>::pop_front()
     if ( not empty() ) 
     {
         Node * aux = m_head->next;
-        
         m_head->next = aux->next;
         delete aux;
-        
         m_size--;
+    }
+    else
+    {
+        throw std::bad_function_call::bad_function_call("List is empty!");
     }
 }
 
 template < typename T >
 const T & Forward_List<T>::back() const 
 {
-    Node * aux = m_head->next;
+    if ( m_head->next == m_tail )
+        throw std::bad_function_call::bad_function_call("List is empty!");
+        
+    Node * aux = m_head;
     
     while (aux->next != m_tail) 
+    {
         aux = aux->next;
-        
+    }
+  
     return aux->data;
 }
 
 template < typename T >
 const T & Forward_List<T>::front() const 
 {
+    if ( m_head->next == m_tail )
+        throw std::bad_function_call::bad_function_call("List is empty!");
+        
     return (m_head->next)->data;
 }
 
