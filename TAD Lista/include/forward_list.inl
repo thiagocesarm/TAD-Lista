@@ -176,3 +176,116 @@ void Forward_List<T>::assign( const T & x )
         }
     }
 }
+
+// IMPLEMENTAÇÃO DOS ITERADORES
+
+template < typename T >
+typename Forward_List<T>::const_iterator Forward_List<T>::cbegin() const
+{
+    return const_iterator( m_head->next );
+    // return iterator( &mi_vector[0] );
+}
+
+template < typename T >
+typename Forward_List<T>::const_iterator Forward_List<T>::cend() const
+{
+    return const_iterator( m_tail );
+    
+}
+
+template < typename T >
+typename Forward_List<T>::iterator Forward_List<T>::begin()
+{
+    return iterator( m_head->next );
+    // return iterator( &mi_vector[0] );
+}
+
+template < typename T >
+typename Forward_List<T>::iterator Forward_List<T>::end()
+{
+    return iterator( m_tail );
+}
+
+
+template < typename T >
+typename Forward_List<T>::iterator Forward_List<T>::insert_after(const_iterator pos, const T & x) 
+{
+    Node * aux = new Node;
+    aux->data = x;
+    aux->next = pos.current->next;
+    pos.current->next = aux;
+    m_size++;
+    return iterator(aux);
+}
+
+template < typename T >
+typename Forward_List<T>::iterator Forward_List<T>::erase_after( const_iterator pos ) 
+{
+    if (pos.current->next != m_tail && pos.current != m_tail ) 
+    {
+        Node * aux = pos.current->next;
+        
+        pos.current->next = aux->next;
+        delete aux;
+        m_size--;
+        return iterator(pos.current->next);
+    }
+    return iterator(pos.current);
+}
+
+template < typename T >
+typename Forward_List<T>::iterator Forward_List<T>::erase_after( const_iterator first, const_iterator last ) {
+        
+        Node * ult;
+        Node * del;
+        ult = m_head;
+        del = m_head->next;
+        
+        while (del != first.current) 
+        {
+            ult = del;
+            del = ult->next;
+        }
+        
+        for (const_iterator i = first; i.current->next != last.current; i++) {
+            del = i.current;
+            delete del;
+            m_size--;
+        }
+        ult->next = last.current;
+        m_size--;
+        return iterator(last.current);
+    
+
+}
+
+template < typename T >
+typename Forward_List<T>::iterator Forward_List<T>::insert_after( const_iterator pos, std::initializer_list<T> ilist ) {
+    for (auto i : ilist) {
+        Node * v = new Node;
+        v->data = i;
+        v->next = pos.current->next;
+        pos.current->next = v;
+        m_size++;
+    }
+    return iterator (pos.current->next);
+}
+
+template < typename T >
+typename Forward_List<T>::const_iterator Forward_List<T>::find( const T & x) const 
+{
+    for (const_iterator i = cbegin(); i != cend(); i++) {
+        if (i.current->data == x)  {
+            return const_iterator(i.current);
+        }
+    }
+    return const_iterator(m_tail);
+}
+
+template < typename T >
+void Forward_List<T>::assign ( std::initializer_list <T> ilist ) {
+    clear();
+    for (auto i : ilist) {
+        push_back(i);
+    }
+}

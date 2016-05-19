@@ -5,54 +5,20 @@
 
 using size_type = long int;
 
-/**
- * Classe de um vetor dinâmico. [Descrição]
+/*!
  */
 
 template < typename T >
 class Vector
 {
 	public:
-		/*
-		class const_iterator { 
-			public:
-				const_iterator(Node* x) : current(x) {}
-				const T & operator* ( ) const;
-				const_iterator & operator++ (); //++it
-				const_iterator operator++ (int); //it++
-				const_iterator & operator-- ();  //--it
-				const_iterator operator-- (int); //it--
-				bool operator== (const const_iterator & rhs) const;
-				bool operator!= (const const_iterator & rhs) const;
-				
-			protected:
-				Node *current;
-				friend class List<T>;
-		};
-		
-		class iterator : public const_iterator { 
-			public:
-				iterator() : const_iterator() {  }
-				const T & operator* ( ) const;
-				T & operator* ();
-				
-				iterator & operator++ (); //++it
-				iterator operator++ (int); //it++
-				iterator & operator-- ();  //--it
-				iterator operator-- (int); //it--
-				
-			protected:
-				iterator( Node *p) : const_iterator(p);
-				friend class List<T>;			
-		};
-		*/
-
+	
 		/** Construtor da classe*/
 		Vector( size_type mi_size = 1 );
 		/** Destrutor da classe*/
 		~Vector(){ /* empty */}
 		
-		/* COMMON METHODS */
+		/* MÉTODOS COMUNS */
 		
 		/** Retorna o números de elementos do vetor*/
 		size_type size() const;
@@ -71,7 +37,8 @@ class Vector
 		/** Subsitui todos os valores do vetor por um determinado x */
 		void assign( const T & x );
 		
-		/* OPERATIONS EXCLUSIVE TO DINAMIC ARRAY */
+		
+		/* OPERAÇÕES EXCLUSIVAS DO VECTOR */
 		
 		/** Retorna o valor referente a posição idx (sem verificar limites) */
 		T & operator[]( size_type idx);
@@ -81,6 +48,15 @@ class Vector
 		size_type capacity() const;
 		/** MOdifica a capacidade de armazenamento para new_capacity */
 		void reserve( size_type new_capacity );
+		
+		class const_iterator;
+		class iterator;
+		
+		
+		iterator begin();
+		const_iterator cbegin() const;
+		iterator end();
+		const_iterator cend() const;
 		
 	private:
 		
@@ -98,7 +74,7 @@ class Forward_List
 		Forward_List();
 		~Forward_List();
 		
-		/* COMMON METHODS */
+		/* MÉTODOS COMUNS */
 		bool empty();
 		size_type size() const;
 		void push_back( const T & x );
@@ -108,7 +84,22 @@ class Forward_List
 		const T & front() const;
 		void assign( const T & x ); 
 		
-		/* OPERATIONS EXCLUSIVE TO LINKED LISTS */
+		class const_iterator;
+		class iterator;
+		
+		iterator begin();
+		const_iterator cbegin() const;
+		iterator end();
+		const_iterator cend() const;
+		
+		iterator insert_after(const_iterator pos, const T & x);
+		iterator erase_after( const_iterator pos);
+		iterator erase_after( const_iterator first, const_iterator last );
+		iterator insert_after( const_iterator pos, std::initializer_list<T> ilist );
+		const_iterator find (const T & x) const;
+		void assign ( std::initializer_list <T > ilist );
+		
+		/* OPERAÇÕES EXCLUSIVAS DE LISTAS ENCADEADAS */
 		void push_front( const T & x );
 		void pop_front();
 		
@@ -135,7 +126,8 @@ class List
 	
 		List();
 		~List();
-		/* COMMON METHODS */
+		
+		/* MÉTODOS COMUNS */
 		size_type size() const;
 		void clear();
 		bool empty();
@@ -145,7 +137,23 @@ class List
 		const T & front() const;
 		void assign( const T & x );
 		
-		/* OPERATIONS EXCLUSIVE TO LINKED LISTS */
+		class const_iterator;
+		class iterator;
+		
+		iterator begin();
+		const_iterator cbegin() const;
+		iterator end();
+		const_iterator cend() const;
+		
+	
+		iterator insert_after(const_iterator pos, const T & x);
+		iterator erase_after( const_iterator pos);
+		iterator erase_after( const_iterator first, const_iterator last );
+		iterator insert_after( const_iterator pos, std::initializer_list<T> ilist );
+		const_iterator find (const T & x) const;
+		void assign ( std::initializer_list <T > ilist );
+		
+		/* OPERAÇÕES EXCLUSIVAS DE LISTAS ENCADEADAS */
 		void push_front( const T & x );
 		void pop_front();
 		
@@ -167,7 +175,109 @@ class List
 		Node * m_tail;
 };
 
+
+// |------------------------------------------------------------------|
+// |------------------ IMPLEMENTAÇÃO DOS ITERADORES ------------------|
+// |------------------------------------------------------------------|
+
+
+
+// |--------------------- ITERADORES DO VECTOR -----------------------|
+
+template < typename T >
+class Vector<T>::const_iterator 
+{ 
+	public:
+		const_iterator( T * x = nullptr ) : current(x) {  }
+		const T & operator* ( ) const { return *current; }
+		
+		
+		const_iterator & operator++ () { current++; return *this;} //++it
+		const_iterator operator++ (int) {const_iterator aux(current); current++; return aux;} //it++
+		const_iterator & operator-- () { current--; return *this;}  //--it
+		const_iterator operator-- (int) {const_iterator aux(current); current--; return aux;} //it--
+		bool operator== (const const_iterator & rhs) const {return current == rhs.current;}
+		bool operator!= (const const_iterator & rhs) const {return current != rhs.current;}
+		
+	protected:
+		T * current;
+		friend class Vector<T>;
+};
+		
+template < typename T >
+class Vector<T>::iterator : public Vector<T>::const_iterator 
+{ 
+	public:
+		iterator( T * x = nullptr ) : const_iterator(x) {  };
+		T & operator* () { return *const_iterator::current; } 
+};
+
+// =================================================================
+
+// |------------------ ITERADORES DO FORWARD LIST ------------------|
+
+template < typename T >
+class Forward_List<T>::const_iterator 
+{ 
+	public:
+		const_iterator( Node * x = nullptr ) : current(x) {  }
+		const Node & operator* ( ) const { return current->data; }
+		
+		
+		const_iterator & operator++ () { current = current->next; return *this;} //++it
+		const_iterator operator++ (int) { const_iterator aux(current); current = current->next; return aux;} //it++
+		bool operator== (const const_iterator & rhs) const {return current->data == rhs.current.current->data;}
+		bool operator!= (const const_iterator & rhs) const {return current->data != rhs.current->data;}
+		
+	protected:
+		Node * current;
+		friend class Forward_List<T>;
+};
+		
+template < typename T >
+class Forward_List<T>::iterator : public Forward_List<T>::const_iterator 
+{ 
+	public:
+		iterator( Node * x = nullptr ) : const_iterator(x) {  }
+		T & operator* () { return const_iterator::current->data; } 
+};
+
+// ==================================================================
+
+// |----------------------- ITERADORES DO LIST ---------------------|
+
+template < typename T >
+class List<T>::const_iterator 
+{ 
+	public:
+		const_iterator( Node * x = nullptr ) : current(x) {  }
+		const Node & operator* ( ) const { return current->data; }
+		
+		
+		const_iterator & operator++ () { current = current->next; return *this;} //++it
+		const_iterator operator++ (int) { const_iterator aux(current); current = current->next; return aux;} //it++
+		const_iterator & operator-- () { current = current->prev; return *this;}  //--it
+		const_iterator operator-- (int) { const_iterator aux(current); current = current->prev; return aux;} //it--
+		bool operator== (const const_iterator & rhs) const {return current->data == rhs.current->data;}
+		bool operator!= (const const_iterator & rhs) const {return current->data != rhs.current->data;}
+		
+	protected:
+		Node * current;
+		friend class List<T>;
+};
+		
+template < typename T >
+class List<T>::iterator : public List<T>::const_iterator 
+{ 
+	public:
+		iterator( Node * x = nullptr ) : const_iterator(x) {  }
+		T & operator* () { return const_iterator::current->data; } 
+};
+
+// ==================================================================
+
 #include "vector.inl"
 #include "forward_list.inl"
 #include "list.inl"
+
 #endif

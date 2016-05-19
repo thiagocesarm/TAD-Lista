@@ -2,7 +2,6 @@
 #include <stdexcept>
 
 using namespace std;
-// http://www.codeguru.com/cpp/article.php/c17775/The-Smart-Pointer-That-Makes-Your-C-Applications-Safer--stduniqueptr.htm
 
 
 template < typename T >
@@ -79,7 +78,7 @@ void Vector<T>::assign( const T & x )
 
 
 
-//  OPERATIONS EXCLUSIVE TO DINAMIC ARRAY 
+//  OPERAÇÕES EXCLUSIVAS DO VECTOR
 
 template < typename T >
 T & Vector<T>::operator[]( size_type idx ) 
@@ -104,7 +103,6 @@ size_type Vector<T>::capacity() const
     return v_capacity;
 }
 
-
 template < typename T >
 void Vector<T>::reserve( size_type new_capacity )
 {
@@ -122,5 +120,30 @@ void Vector<T>::reserve( size_type new_capacity )
     }
 }
 
-//CLASS CONST ITERATOR
 
+// IMPLEMENTAÇÃO DOS ITERADORES
+
+template < typename T >
+typename Vector<T>::const_iterator Vector<T>::cbegin() const
+{
+    return const_iterator( mi_vector.get() );
+}
+
+template < typename T >
+typename Vector<T>::const_iterator Vector<T>::cend() const
+{
+    return const_iterator( mi_vector.get() + v_size );
+    
+}
+
+template < typename T >
+typename Vector<T>::iterator Vector<T>::begin()
+{
+    return iterator( mi_vector.get() );
+}
+
+template < typename T >
+typename Vector<T>::iterator Vector<T>::end()
+{
+    return iterator( mi_vector.get() + v_size );
+}

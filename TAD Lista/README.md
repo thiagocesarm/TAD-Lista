@@ -1,30 +1,56 @@
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+## TAD Lista
+
+por João Emmanuel Izidio da Silva & Thiago César Morais Diniz de Lucena
+
+Descrição
+--------------------------------------------------------------------------------------
+
+Esse projeto contém a implementação, em C++, do tipo abstrato de dados *lista*, 
+através de três estrutura de dados: array dinâmico, lista simplesmente encadeada 
+e lista duplamente encadeada, implementadas em classes separadas. As classes das 
+três estruturas de dados e seus métodos baseiam-se, respectivamente, nas classes
+ std::vector, std::forward_list e std::list da biblioteca padrão STL.
+ 
+O projeto também contém arquivos com exemplos de funcionamento dos métodos de 
+cada classe. 
 
 
-Hi there! Welcome to Cloud9 IDE!
+Instalação e execução
+--------------------------------------------------------------------------------------
 
-To get you started with C/C++, we have created some small hello world
-applications and a Makefile.
+Para instalar o programar, basta seguir os seguintes passos: 
 
-Have a look at the files, and use the terminal to build them:
+1. Extrair o arquivo "TAD_Lista.zip" que contém todos os arquivos com os códigos.
+2. Abrir o terminal e navegar até a pasta extraída do arquivo zip.
+3. Executar o comando:
 
-    $ make
-    $ ./hello-c-world
-    $ ./hello-cpp-world
+g++ -std=c++11 -I include src/*nome_do_arquivo* -o bin/list
 
-We're sure you can take it from there. Go ahead and edit the code, 
-or add some new files. It's all up to you! 
+*nome_do_arquivo* deve ser substituído por um dos três arquivos contidos na 
+pasta src/ de acordo com qual estrutura de dados deseja-se executar.
 
-Happy coding!
-The Cloud9 IDE team
+Em seguida, para executar o programa, execute o seguinte comando:
+
+bin/list
 
 
-## Support & Documentation
+Estrutura
+--------------------------------------------------------------------------------------
 
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+A pasta */bin* armazena o arquivo executável que é gerado após a execução do
+programa.
+
+A pasta */include* contêm a biblioteca com as classe implementadas e os arquivos
+com a implementação dos métodos das classes.
+
+A pasta */src* contêm os arquivos com exemplos de funcionamento de cada uma das 
+estruturas de dados ( o arquivo referente a classe List está drasticamente 
+incompleto).
+
+
+Operações não suportadas
+--------------------------------------------------------------------------------------
+
+Os iteradores das classes foram apenas parcialmente implementados. Nas classes
+Forward_List e List, as operações de assign com iteradores não é suportada. Na 
+classe Vector, apenas os iteradores begin, end, cbegin e cend foram implemetados.
