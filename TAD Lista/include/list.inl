@@ -1,3 +1,8 @@
+/*! 
+ *  @file forward_list.inl
+ *  @brief Arquivo com implementação dos métodos da classe List.
+ *
+ */
 #include "list_lib.h"
 #include <stdexcept>
 
@@ -173,7 +178,6 @@ template < typename T >
 typename List<T>::const_iterator List<T>::cbegin() const
 {
     return const_iterator( m_head->next );
-    // return iterator( &mi_vector[0] );
 }
 
 template < typename T >
@@ -187,7 +191,6 @@ template < typename T >
 typename List<T>::iterator List<T>::begin()
 {
     return iterator( m_head->next );
-    // return iterator( &mi_vector[0] );
 }
 
 template < typename T >

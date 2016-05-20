@@ -1,6 +1,6 @@
 /*! 
  *  @file drive_frwd_list.cpp
- *  @brief Arquivo com a função main() que testa a classe List.
+ *  @brief Arquivo com a função main() que testa a classe Forward_List.
  *
  */
 

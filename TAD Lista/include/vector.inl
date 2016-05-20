@@ -1,8 +1,12 @@
+/*! 
+ *  @file vector.inl
+ *  @brief Arquivo com implementação dos métodos da classe Vector.
+ *
+ */
 #include "list_lib.h"
 #include <stdexcept>
 
 using namespace std;
-
 
 template < typename T >
 Vector<T>::Vector( size_type mi_size ):
@@ -10,7 +14,6 @@ Vector<T>::Vector( size_type mi_size ):
     v_capacity( mi_size ),
     mi_vector( new T[mi_size] )
 { /* empty */ }
-
 
 template < typename T >
 size_type Vector<T>::size() const
@@ -40,7 +43,6 @@ void Vector<T>::push_back( const T & x )
     mi_vector[v_size++] = x;
 }
 
-
 template < typename T >
 void Vector<T>::pop_back()
 {
@@ -48,10 +50,6 @@ void Vector<T>::pop_back()
         mi_vector[--v_size].~T();
 }
 
-/*!
- *  @brief Retorna o valor do último elemento do vector.
- *  @return O último elemento do vector.
- */
 template < typename T >
 const T & Vector<T>::back() const
 {
@@ -59,13 +57,11 @@ const T & Vector<T>::back() const
     // Assim como na biblioteca padrão, o comportamento da função é indefinido quando o vector está vazio.
 }
 
-
 template < typename T >
 const T & Vector<T>::front() const 
 {
     return mi_vector[0];
 }
-
 
 template < typename T >
 void Vector<T>::assign( const T & x )
@@ -75,8 +71,6 @@ void Vector<T>::assign( const T & x )
         mi_vector[i] = x;
     }
 }
-
-
 
 //  OPERAÇÕES EXCLUSIVAS DO VECTOR
 

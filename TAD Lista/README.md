@@ -51,6 +51,5 @@ incompleto).
 Operações não suportadas
 --------------------------------------------------------------------------------------
 
-Os iteradores das classes foram apenas parcialmente implementados. Nas classes
-Forward_List e List, as operações de assign com iteradores não é suportada. Na 
-classe Vector, apenas os iteradores begin, end, cbegin e cend foram implemetados.
+Nas classes Forward_List e List, as operações insert e assign que requerem
+iteradores e utilizam templates não foram implementadas.
