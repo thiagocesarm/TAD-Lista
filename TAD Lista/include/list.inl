@@ -72,6 +72,7 @@ void List<T>::pop_back()
         m_tail->prev = m_tail->prev->prev;
         
         delete aux;
+        m_size--;
     }
     else
     {

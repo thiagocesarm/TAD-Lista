@@ -221,12 +221,12 @@ class Forward_List<T>::const_iterator
 { 
 	public:
 		const_iterator( Node * x = nullptr ) : current(x) {  }
-		const Node & operator* ( ) const { return current->data; }
+		const T & operator* ( ) const { return current->data; }
 		
 		
 		const_iterator & operator++ () { current = current->next; return *this;} //++it
 		const_iterator operator++ (int) { const_iterator aux(current); current = current->next; return aux;} //it++
-		bool operator== (const const_iterator & rhs) const {return current->data == rhs.current.current->data;}
+		bool operator== (const const_iterator & rhs) const {return current->data == rhs.current->data;}
 		bool operator!= (const const_iterator & rhs) const {return current->data != rhs.current->data;}
 		
 	protected:
@@ -251,7 +251,7 @@ class List<T>::const_iterator
 { 
 	public:
 		const_iterator( Node * x = nullptr ) : current(x) {  }
-		const Node & operator* ( ) const { return current->data; }
+		const T & operator* ( ) const { return current->data; }
 		
 		
 		const_iterator & operator++ () { current = current->next; return *this;} //++it
