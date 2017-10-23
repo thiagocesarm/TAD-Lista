@@ -24,15 +24,18 @@ Para instalar o programar, basta seguir os seguintes passos:
 2. Abrir o terminal e navegar até a pasta extraída do arquivo zip.
 3. Executar o comando:
 
+```
 g++ -std=c++11 -I include src/*nome_do_arquivo* -o bin/list
+```
 
 *nome_do_arquivo* deve ser substituído por um dos três arquivos contidos na 
 pasta src/ de acordo com qual estrutura de dados deseja-se executar.
 
 Em seguida, para executar o programa, execute o seguinte comando:
 
+```
 bin/list
-
+```
 
 Estrutura
 --------------------------------------------------------------------------------------
