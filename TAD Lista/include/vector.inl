@@ -3,11 +3,13 @@
  *  @brief Arquivo com implementação dos métodos da classe Vector.
  *
  */
+
 #include "list_lib.h"
 #include <stdexcept>
 
 using namespace std;
 
+//Construtor
 template < typename T >
 Vector<T>::Vector( size_type mi_size ):
     v_size(0),
@@ -15,12 +17,14 @@ Vector<T>::Vector( size_type mi_size ):
     mi_vector( new T[mi_size] )
 { /* empty */ }
 
+//Função que retorna o tamanho
 template < typename T >
 size_type Vector<T>::size() const
 {
     return v_size;
 }
 
+//Função para apagar o vetor
 template < typename T >
 void Vector<T>::clear()
 {
@@ -28,12 +32,14 @@ void Vector<T>::clear()
         mi_vector[--v_size].~T();
 }
 
+//FUnção que verifica se o vetor é vazio
 template < typename T >
 bool Vector<T>::empty() 
 {
     return (v_size == 0);
 }
 
+//Adiciona um elemento ao final do vetor
 template < typename T >
 void Vector<T>::push_back( const T & x ) 
 {
@@ -43,6 +49,7 @@ void Vector<T>::push_back( const T & x )
     mi_vector[v_size++] = x;
 }
 
+//Remove um elemento do fim do vetor
 template < typename T >
 void Vector<T>::pop_back()
 {
@@ -50,6 +57,7 @@ void Vector<T>::pop_back()
         mi_vector[--v_size].~T();
 }
 
+//Retorna o ultimo elemento do vetor
 template < typename T >
 const T & Vector<T>::back() const
 {
@@ -57,6 +65,7 @@ const T & Vector<T>::back() const
     // Assim como na biblioteca padrão, o comportamento da função é indefinido quando o vector está vazio.
 }
 
+//Retorna o primeiro elemento do vetor
 template < typename T >
 const T & Vector<T>::front() const 
 {
