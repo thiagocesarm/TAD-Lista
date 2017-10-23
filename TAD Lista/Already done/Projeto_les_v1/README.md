@@ -1,4 +1,4 @@
-LISTA ENCADEADA SIMPLES
+## LISTA ENCADEADA SIMPLES
 Autor: Thiago César Morais Diniz de Lucena
 
 Arquivos
@@ -23,8 +23,12 @@ Compilação
 Para compilar, basta ir pelo terminal até a pasta 'Projeto_les_v1' e executar
 o seguinte comando:
 
+```
 g++ -Wall -std=c++11 -pedantic drive_les_v1.cpp les_v1.cpp -o drive_les_v1
+```
 
 Depois, abrir o executável através do seguinte comando:
 
+```
 ./drive_les_v1
+```
